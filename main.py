@@ -9,12 +9,17 @@ data = '{}'
 
 @app.get('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello Agones!'
 
 @app.get('/shutdown')
 def shutdown():
     response = requests.post('http://localhost:9358/shutdown', headers=headers, data=data)
     return 'shutdown'
+
+@app.get('/reset')
+def reset():
+    response = requests.post('http://localhost:9358/ready', headers=headers, data=data)
+    return 'game server reset'    
 
 @app.on_event("startup")
 def ready():
